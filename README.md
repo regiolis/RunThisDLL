@@ -9,7 +9,7 @@ RunThisDLL is a lightweight Windows application that allows you to call exported
 ## Features
 
 - ✅ Execute DLL functions with the standard `rundll32` signature
-- ✅ Automatic detection of Unicode (`FunctionW`) and ANSI (`FunctionA`) variants
+- ✅ Automatic detection of Unicode (`FunctionW`) and ANSI (`Function`) variants
 - ✅ Smart DLL path resolution (searches in system directories and PATH)
 - ✅ Support for both short names and full paths
 - ✅ Built-in "About" dialog
@@ -26,13 +26,13 @@ RunThisDLL.exe ModuleFileName,ProcName [Arguments]
 ### Examples
 
 ```cmd
-# Using a system DLL
+# Using a system DLL (opens Display Settings)
 RunThisDLL.exe shell32.dll,Control_RunDLL desk.cpl
 
 # Using full path
-RunThisDLL.exe C:\Windows\System32\shell32.dll,Control_RunDLL
+RunThisDLL.exe C:\Windows\System32\shell32.dll,Control_RunDLL desk.cpl
 
-# With arguments
+# With custom DLL and arguments
 RunThisDLL.exe MyCustom.dll,MyFunction "Hello World"
 
 # Display About dialog
@@ -60,7 +60,7 @@ extern "C" __declspec(dllexport) void WINAPI YourFunctionW(
 - The function name can be anything, but the signature must match exactly
 - Use `LPWSTR` for Unicode (Wide) version or `LPSTR` for ANSI version
 - Export the function with `__declspec(dllexport)` or use a `.def` file
-- The tool automatically tries the `W` suffix first, then without
+- The tool automatically tries the `FunctionNameW` suffix first, then `FunctionName` without suffix
 
 ## DLL Search Order
 
@@ -75,8 +75,7 @@ RunThisDLL uses Windows' `SearchPathW()` API to locate DLLs in the following ord
 ## Building
 
 ### Requirements
-- Visual Studio 2019 or later
-- Windows SDK
+- Visual Studio 2019 or later with C++ Desktop Development workload
 
 ### Build Instructions
 
