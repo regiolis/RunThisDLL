@@ -42,7 +42,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
         if (_wcsicmp(argv[1], L"About") == 0 || _wcsicmp(argv[1], L"/About") == 0)
         {
-            // Afficher la boîte de dialogue About
+            // Show About dialog
             DialogBox(hInstance, MAKEINTRESOURCE(IDD_ABOUTBOX), NULL, AboutDlgProc);
             LocalFree(argv);
             return 0;
